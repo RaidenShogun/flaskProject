@@ -1,3 +1,5 @@
+# Developers
+Ronald Shi 23153551  Xiaoyu Huang 23371027  Charlie Shan 23173744
 # Introduction
 This is a Flask web application that uses the OpenAI API to create a chatbot. The chatbot interacts with users and provides therapy-like conversation in response to prompts from the user. The chat history is stored in sqlite database and is loaded and saved to allow for continuous conversations with the chatbot.
 
