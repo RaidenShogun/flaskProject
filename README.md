@@ -13,3 +13,5 @@ This is a Flask web application that uses the OpenAI API to create a chatbot. Th
 
 ## Authors
 RaidenShogun ([RaidenShogun](https://github.com/RaidenShogun))
+Luke9z ([Luke9z](https://github.com/Luke9z))
+
