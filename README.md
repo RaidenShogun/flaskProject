@@ -3,8 +3,8 @@ This is a Flask web application that uses the OpenAI API to create a chatbot. Th
 
 # Steps to Run the Web Application Using run.py
 1. Install the required Python packages by running the following command in the terminal:
-  'pip install -r requirements.txt'
+  ·pip install -r requirements.txt·
 2. Run the following command in the terminal to start the Flask development server:
-  'python run.py'
+  ·python run.py·
 3. Open a web browser and navigate to http://127.0.0.1:5000/ to view the home page of the web application and login
 4. You can start your chat
