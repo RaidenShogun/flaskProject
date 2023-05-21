@@ -7,7 +7,7 @@ from flask_socketio import send, emit
 from flask_login import logout_user
 import openai
 
-openai.api_key = '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'
+openai.api_key = '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'
 
 @app.route('/')
 def root():
@@ -21,7 +21,7 @@ def register():
         new_user = User(username=data['username'], password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
-        return redirect(url_for('login'))  # 重定向到登录页面
+        return redirect(url_for('login'))
     return render_template('register.html')
 
 @app.route("/index", methods=['GET', 'POST'])
@@ -31,24 +31,23 @@ def login():
         user = User.query.filter_by(username=data['username']).first()
         if not user or not check_password_hash(user.password, data['password']):
             flash('Login Unsuccessful. Please check username and password', 'danger')
-            return redirect(url_for('index'))  # 登录失败，重新定向到登录页面
+            return redirect(url_for('index'))
         login_user(user)
-        return redirect(url_for('chat_page'))  # 登录成功，重定向到聊天页面
+        return redirect(url_for('chat_page'))
     return render_template('index.html')
 
 @app.route("/chat", methods=['GET'])
 @login_required
 def chat_page():
     print(f"Entering chat_page for user {current_user.username}")
-    chats = Chat.query.filter_by(user_id=current_user.id).all()  # 获取聊天记录
-    chats_dict = [chat.to_dict() for chat in chats]  # 将每个chat对象转化为字典
-    return render_template('chat.html', chats=chats_dict, username=current_user.username)  # 渲染聊天页面，并传入聊天记录
+    chats = Chat.query.filter_by(user_id=current_user.id).all()
+    chats_dict = [chat.to_dict() for chat in chats]
+    return render_template('chat.html', chats=chats_dict, username=current_user.username)
 
 
 @socketio.on('message')
 # @login_required
 def chat(data):
-    print("发送了")
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
@@ -60,7 +59,7 @@ def chat(data):
     db.session.add(user_chat)
 
     bot_chat = Chat(content=response['choices'][0]['message']['content'], user_id=current_user.id,
-                    role='assistant')  # GPT生成的消息
+                    role='assistant')
     db.session.add(bot_chat)
 
     db.session.commit()

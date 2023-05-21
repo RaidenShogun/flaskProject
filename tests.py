@@ -24,7 +24,7 @@ class TestChatApp(TestCase):
         db.session.remove()
         db.drop_all()
 
-    # 测试登录功能
+
     def test_login_user1(self):
         with self.client:
             response = self.client.post('/index', json={'username': 'test_user1', 'password': 'test_password'})
@@ -40,7 +40,7 @@ class TestChatApp(TestCase):
             response = self.client.post('/index', json={'username': 'invalid_user', 'password': 'invalid_password'})
             self.assert400(response)
 
-    # 测试注册功能
+
     def test_register_new_user(self):
         with self.client:
             response = self.client.post('/register', json={'username': 'new_user', 'password': 'new_password'})
@@ -56,7 +56,7 @@ class TestChatApp(TestCase):
             response = self.client.post('/register', json={'username': 'test_user2', 'password': 'new_password'})
             self.assert400(response)
 
-    # 测试获取聊天记录功能
+
     def test_chat_history_user1(self):
         with self.client:
             self.client.post('/index', json={'username': 'test_user1', 'password': 'test_password'})

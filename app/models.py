@@ -18,7 +18,7 @@ class Chat(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "date_posted": self.date_posted.strftime("%Y-%m-%d %H:%M:%S"),  # 将 datetime 对象转化为字符串
+            "date_posted": self.date_posted.strftime("%Y-%m-%d %H:%M:%S"),
             "content": self.content,
             "user_id": self.user_id,
             "role": self.role,
