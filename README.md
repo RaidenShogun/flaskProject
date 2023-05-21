@@ -10,3 +10,6 @@ This is a Flask web application that uses the OpenAI API to create a chatbot. Th
   `python run.py`
 3. Open a web browser and navigate to http://127.0.0.1:5000/ to view the home page of the web application and login
 4. You can start your chat
+
+## Authors
+RaidenShogun ([RaidenShogun](https://github.com/RaidenShogun))
