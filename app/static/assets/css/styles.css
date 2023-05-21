@@ -1,0 +1,505 @@
+/*=============== GOOGLE FONTS ===============*/
+/* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"); */
+
+  @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap');
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --white-color: hsl(0, 0%, 100%);
+  --black-color: hsl(0, 0%, 0%);
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Oxygen", sans-serif;
+  --h1-font-size: 1.75rem;
+  --normal-font-size: 1rem;
+  --small-font-size: .813rem;
+  /*========== Font weight ==========*/
+  --font-medium: 500;
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body,
+input,
+button {
+  font-size: var(--normal-font-size);
+  font-family: var(--body-font);
+}
+
+body {
+  color: var(--white-color);
+}
+
+input,
+button {
+  border: none;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== LOGIN ===============*/
+.login {
+  position: relative;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+ /*node*/
+  overflow: hidden;
+  min-height: 100vh;
+  /* 隐藏横向滚动条 */
+
+  /* overflow-x: hidden; */
+
+
+}
+/*node*/
+.login__video{
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
+}
+.login__img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.login__form {
+  position: relative;
+  background-color: hsla(0, 0%, 10%, 0.1);
+  border: 2px solid var(--white-color);
+  margin-inline: 1.5rem;
+  padding: 2.5rem 1.5rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+}
+.login__title {
+  text-align: center;
+  font-size: var(--h1-font-size);
+  font-weight: var(--font-medium);
+  margin-bottom: 2rem;
+}
+.login__content, .login__box {
+  display: grid;
+}
+.login__content {
+  row-gap: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+.login__box {
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+  column-gap: 0.75rem;
+  border-bottom: 2px solid var(--white-color);
+}
+.login__icon, .login__eye {
+  font-size: 1.25rem;
+}
+.login__input {
+  width: 100%;
+  padding-block: 0.8rem;
+  background: none;
+  color: var(--white-color);
+  position: relative;
+  z-index: 1;
+}
+.login__box-input {
+  position: relative;
+}
+.login__label {
+  position: absolute;
+  left: 0;
+  top: 13px;
+  font-weight: var(--font-medium);
+  transition: top 0.3s, font-size 0.3s;
+}
+.login__eye {
+  position: absolute;
+  right: 0;
+  top: 18px;
+  z-index: 10;
+  cursor: pointer;
+}
+.login__box:nth-child(2) input {
+  padding-right: 1.8rem;
+}
+.login__check, .login__check-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.login__check {
+  margin-bottom: 1.5rem;
+}
+.login__check-label, .login__forgot, .login__register {
+  font-size: var(--small-font-size);
+}
+.login__check-group {
+  column-gap: 0.5rem;
+}
+.login__check-input {
+  width: 16px;
+  height: 16px;
+}
+.login__forgot {
+  color: var(--white-color);
+}
+.login__forgot:hover {
+  text-decoration: underline;
+}
+.login__button {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--white-color);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+/*node*/
+.login__button:hover {
+  background-color: rgb(245, 184, 245);
+  /* 添加其他的样式，根据需求进行调整 */
+}
+.login__register {
+  text-align: center;
+}
+.login__register a {
+  color: var(--white-color);
+  font-weight: var(--font-medium);
+}
+.login__register a:hover {
+  text-decoration: underline;
+}
+
+/* Input focus move up label */
+.login__input:focus + .login__label {
+  top: -12px;
+  font-size: var(--small-font-size);
+}
+
+/* Input focus sticky top label */
+.login__input:not(:placeholder-shown).login__input:not(:focus) + .login__label {
+  top: -12px;
+  font-size: var(--small-font-size);
+}
+/* node */
+.chatpage__awd{
+  position: fixed;
+}
+/* node */
+#overlay {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: opacity 1s ease-in-out;
+}
+.overlay_para{
+  /* font-size: var(--normal-font-size); */
+  font-family: var(--body-font);
+  text-align: center;
+
+} 
+
+
+/*    =========================        */
+
+/*=============== CHAT PAGE ===============*/
+
+.chat-screen {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.chat-container {
+  background-color: hsla(0, 0%, 10%, 0.1);
+  border: 2px solid var(--white-color);
+  /* margin: 0 auto; */
+  padding: 2.5rem 1.5rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  width: 1000px;
+  max-width: 1000px;
+  height: 60vh;
+  
+  overflow: auto;
+  margin-left: 20px;
+}
+
+.login__title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--white-color);
+  margin-bottom: 2rem;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-box {
+  color:var(--white-color);
+  width: 70%;
+  height: 40px;
+  background-color: hsla(0, 0%, 10%, 0.1);
+  border: 2px solid var(--white-color);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(8px);
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.input-button {
+  color: white;
+  width: 20%;
+  height: 40px;
+  background-color: hsla(0, 0%, 10%, 0.1);
+  border: 2px solid var(--white-color);
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.chat-box {
+  background-color: hsla(0, 0%, 10%, 0.1);
+  border: 2px solid var(--white-color);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  color: var(--white-color);
+  word-wrap: break-word;
+  backdrop-filter: blur(8px);
+}
+.message-container {
+  display: flex;
+  align-items: center;
+}
+
+.user-message {
+  border: 2px solid var(--white-color);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  width: fit-content; /* 将宽度设置为适应内容的大小 */
+  margin-left: auto;
+}
+
+.bot-message {
+  border: 2px solid var(--white-color);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  width: fit-content; /* 将宽度设置为适应内容的大小 */
+  display: inline-flex;
+  align-items: flex-start;
+}
+
+.message-image {
+  max-width: 46px; /* 设置图片最大宽度 */
+  max-height: 46px; /* 设置图片最大高度 */
+  opacity: 0.5; /* 设置图片透明度 */
+  margin-left: 10px;
+  margin-right: 10px; /* 设置右侧外边距 */
+  border-radius: 23px;
+  display: flex;
+  
+}
+.bot-content {
+  display: flex;
+  align-items: center;
+}
+
+.bot-content .message-image {
+  margin-right: 10px; /* 调整头像与消息内容之间的间距 */
+}
+
+/* ======= = ===聊天记录框 ==== */
+.chat-search{
+background-color: hsla(0, 0%, 10%, 0.1);
+  border: 2px solid var(--white-color);
+  /* margin: 0 auto; */
+  padding: 2.5rem 1.5rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(8px);
+  width: 200px;
+  max-width: 200px;
+  height: 60vh;
+  overflow: auto;
+  margin-right: 20px;
+}
+.chat-input{
+  color:var(--white-color);
+  width: 90%;
+  height: 15%;
+  background-color: hsla(0, 0%, 10%, 0.1);
+  border: 2px solid var(--white-color);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(8px);
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  resize: none; /* This disables resizing the textarea */
+}
+
+.chat-search-button{
+  color: white;
+  width: 60%;
+  height: 40px;
+  background-color: hsla(0, 0%, 10%, 0.1);
+  border: 2px solid var(--white-color);
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+
+}
+
+.logout-button{
+  color: white;
+  width: 60%;
+  height: 40px;
+  background-color: hsla(0, 0%, 10%, 0.1);
+  border: 2px solid var(--white-color);
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+
+}
+/*=============== BREAKPOINTS ===============*/
+/* For medium devices */
+@media screen and (min-width: 576px) {
+  .login {
+    justify-content: center;
+  }
+  .login__form {
+    width: 432px;
+    padding: 4rem 3rem 3.5rem;
+    border-radius: 1.5rem;
+  }
+  .login__title {
+    font-size: 2rem;
+  }
+}
+
+
+/* 在较小屏幕上应用不同的样式 */
+@media (max-width: 1000px) {
+  .chat-container {
+    width: 95%;
+    /* max-width: 1000px; */
+    height: 70vh;
+  }
+}
+/* // 适用于 iPhone 等小屏幕设备 */
+@media (max-width: 576px) {  
+  .chat-screen {
+    flex-direction: column;
+    
+  }
+
+  .chat-container {
+    width: 80%;
+    height: 50vh;
+  }
+
+  .chat-wrapper {
+    width: 100%;
+  }
+}
+
+/* 滚动条css */
+
+/* For webkit browsers (Chrome, Safari) */
+/* ::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6c9fe2;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1165e4;
+} */
+
+/* 顶级滚动条 */
+
+/* For webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(235, 193, 228);
+  border-radius: 10px;
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #f553e7;
+  background-image: -webkit-linear-gradient(45deg,
+                                            rgba(95, 197, 245, 0.2) 25%,
+                                            transparent 25%,
+                                            transparent 50%,
+                                            rgba(73, 84, 238, 0.2) 50%,
+                                            rgba(133, 27, 124, 0.2) 75%,
+                                            transparent 75%,
+                                            transparent)
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(80, 80, 80, 0.4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  background-image: -webkit-linear-gradient(45deg,
+                                            rgba(166, 186, 230, 0.2) 25%,
+                                            transparent 25%,
+                                            transparent 50%,
+                                            rgba(29, 53, 160, 0.2) 50%,
+                                            rgba(218, 97, 201, 0.2) 75%,
+                                            transparent 75%,
+                                            transparent)
+}
