@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+     <!--=============== REMIXICONS ===============-->
+     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+     <!--=============== CSS ===============-->
+     <link rel="stylesheet" href="../static/assets/css/styles.css">
+
+    <title>Register</title>
+
+</head>
+<body>
+    
+
+    <div class="login">
+        <!-- <img src="assets/img/login-bg.png" alt="login image" class="login__img"> -->
+        <!-- node -->
+        <video autoplay muted loop class="login__video">
+           <source src="../static/assets/img/jfhcdfd5.mp4" type="video/mp4">
+        </video>
+        <!-- node -->
+        
+        <form action="" class="login__form" id="login__form">
+           <h1 class="login__title"><b>Register</b></h1>
+
+           <div class="login__content">
+              <div class="login__box">
+                 <i class="ri-user-3-line login__icon"></i>
+
+                 <div class="login__box-input">
+                    <input type="email" required class="login__input" id="username" placeholder=" ">
+                    <label for="" class="login__label">Email Address</label>
+                 </div>
+              </div>
+
+              <div class="login__box">
+                 <i class="ri-lock-2-line login__icon"></i>
+
+                 <div class="login__box-input">
+                    <input type="password" required class="login__input" id="password" placeholder=" ">
+                    <label for="" class="login__label">Password</label>
+                   
+                 </div>
+              </div>
+
+              <div class="login__box">
+                <i class="ri-lock-2-line login__icon"></i>
+
+                <div class="login__box-input">
+                    <!-- node -->
+                    <!-- 通过使用JavaScript来实现这个功能。在表单的onsubmit事件中，
+                        您可以检查两个密码输入框是否一致。如果不一致，
+                        您可以阻止表单的提交，并显示一个警告。 -->
+                   <input type="password" required class="login__input" id="confirm-pass" placeholder=" ">
+                   <label for="" class="login__label">Confirm Password</label>
+                  
+                </div>
+             </div>
+
+           </div>
+
+
+           <div class="login__check">
+              <div class="login__check-group">
+                <p><b>Gender</b></p>
+                 <input type="radio" id="male" name="gender" class="login__check-input">
+                 <label for="Male" class="login__check-label">Male</label>
+              </div>
+
+              <div class="login__check-group">
+
+                <input type="radio" id="female" name="gender" class="login__check-input">
+                <label for="female" class="login__check-label">Female</label>
+              </div>
+
+              <div class="login__check-group">
+
+                <input type="radio" id="secret" name="gender" class="login__check-input">
+                <label for="secret" class="login__check-label">Secret</label>
+              </div>
+
+
+           </div>
+
+           <button type="submit" class="login__button"><b>Sign up</b></button>
+
+           <p class="login__register">
+              If you have an account? <a href="index"><strong>Log in</strong></a>
+           </p>
+        </form>
+     </div>
+     
+     <!--=============== MAIN JS ===============-->
+     <script src="../static/assets/js/register.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--=============== REMIXICONS ===============-->
+      <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+      
+      <!--=============== CSS ===============-->
+      <link rel="stylesheet" href="../static/assets/css/styles.css">
+
+      <title>Chat</title>
+
+      <style>
+
+@keyframes blink {
+  0% {background-color: transparent;}
+  50% {background-color: yellow;}
+  100% {background-color: transparent;}
+}
+
+.blink {
+  animation: blink 1s linear infinite;
+}
+
+
+      </style>
+   </head>
+   <body>
+
+    <div class='login'>
+      <video autoplay muted loop class="login__video">
+        <source src="../static/assets/img/jfhcdfd5.mp4" type="video/mp4">
+      </video>
+      
+      <div class="chat-screen">
+
+
+        <div class="chat-search">
+           <!-- Add your search bar inside the chat-search div -->
+          <input class="chat-input" type="text" id="searchInput" placeholder="Search messages...">
+        
+          <button class="chat-search-button" onclick="searchChat()">Search</button>
+          
+          <div class="user-info">
+              <div id="userName">Current User: {{username}}</div>
+              <button class="logout-button" onclick="logout()">Logout</button>
+          </div>
+
+        </div>
+
+        
+
+
+        <div class="chat-container" id="chatContainer">
+          <div class="login__title">Welcome to the chat server!</div>
+
+        </div>
+        <!-- 
+        <div class="search-container" id="searchContainer" style="display:none;">
+          <input type="text" id="searchInput" placeholder="Search messages...">
+          <button onclick="searchChat()">Search</button>
+        </div> -->
+
+        
+
+               <!-- 新建的聊天历史chat 
+        <div id="chatArchives" style="display:none;">
+        
+        </div> -->
+
+      </div>
+      
+      <div class="chat-wrapper">
+        <div class="input-container">
+          <input type="text" class='input-box' id="userInput" placeholder="Type your message..." onkeydown="handleKeyPress(event)" />
+          <button class='input-button' onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+    </div>
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" integrity="sha512-RyyfVzNN4e6+M3wV3T4wyRqB2mAMRU0vghQ+q0C8LkF0mDyV7ZC3Ldqf/rMTHq16KiqqBk9deF/WIT9LUv6xZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <script>
+
+           var socket = io('http://127.0.0.1:5000');
+
+           function addChatMessage(chat) {
+  var chatContainer = document.getElementById('chatContainer');
+
+  var messageType = (chat.role === 'user') ? 'user-message' : 'bot-message';
+  var imageSrc = (chat.role === 'user') ? '../static/assets/img/me.jpeg' : '../static/assets/img/bot.png';
+
+  var messageElement = createMessageElement(chat.content, messageType, imageSrc);
+  chatContainer.appendChild(messageElement);
+
+  updateChatMessageWidth(messageElement); // 更新聊天框宽度
+}
+window.onload = function() {
+  var chats = {{ chats|tojson|safe }};
+
+  for (var i = 0; i < chats.length; i++) {
+    addChatMessage(chats[i]);
+  }
+}
+
+
+      function handleKeyPress(event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          sendMessage();
+        }
+      }
+
+
+
+
+    
+      function sendMessage() {
+        var userInput = document.getElementById('userInput');
+        var chatContainer = document.getElementById('chatContainer');
+
+        if (userInput.value.trim() === '') {
+          return; // Don't send empty messages
+        }
+    
+        var userMessage = createMessageElement(userInput.value, 'user-message', '../static/assets/img/me.jpeg');
+        chatContainer.appendChild(userMessage);
+    
+        updateChatMessageWidth(userMessage); // 更新聊天框宽度
+    
+        // Call your backend API or perform any necessary processing here
+        // to get the bot's response
+             // Send the user's message to the backend
+            socket.emit('message', {message: userInput.value});
+    
+        {#var botResponse = 'This is a bot response.';#}
+        {#var botMessage = createMessageElement(botResponse, 'bot-message', '../static/assets/img/bot.png');#}
+        {#chatContainer.appendChild(botMessage);#}
+{#    #}
+{#        updateChatMessageWidth(botMessage); // 更新聊天框宽度#}
+    
+        userInput.value = '';
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+
+    // Listen for 'bot response' event from the server
+    socket.on('bot response', function(botResponse) {
+        var chatContainer = document.getElementById('chatContainer');
+        {#var botMessage = document.createElement('div');#}
+
+        var botResponse = 'Bot: ' + botResponse;
+        var botMessage = createMessageElement(botResponse, 'bot-message', '../static/assets/img/bot.png');
+        chatContainer.appendChild(botMessage);
+
+        updateChatMessageWidth(botMessage); // 更新聊天框宽度
+
+        {#botMessage.textContent = 'Bot: ' + botResponse;#}
+        {#botMessage.classList.add('chat-message', 'bot-message');#}
+        {#chatContainer.appendChild(botMessage);#}
+
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    });
+
+    
+      function searchChat() {
+  var searchInput = document.getElementById('searchInput');
+  var chatContainer = document.getElementById('chatContainer');
+  var messages = chatContainer.getElementsByClassName('chat-message');
+
+  // Loop through all the messages to find a match
+  for (var i = 0; i < messages.length; i++) {
+    if (messages[i].textContent.includes(searchInput.value)) {
+      // If a match is found, manually scroll the chat container
+      var rect = messages[i].getBoundingClientRect();
+      var containerRect = chatContainer.getBoundingClientRect();
+      chatContainer.scrollTop += rect.top - containerRect.top;
+      
+      // Highlight the message
+      messages[i].classList.add('blink');
+      
+      // Remove the highlight after 3 seconds
+      setTimeout(function() {
+        messages[i].classList.remove('blink');
+      }, 3000);
+      
+      return;
+    }
+  }
+
+  // If no match is found, show an alert
+  alert("Message not found");
+}
+
+ 
+
+
+
+      function createMessageElement(message, messageType, imageSrc) {
+        var containerElement = document.createElement('div');
+        containerElement.classList.add('message-container');
+      
+        var messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        messageElement.classList.add('chat-message', messageType);
+      
+        var imageElement = document.createElement('img');
+        imageElement.src = imageSrc;
+        imageElement.classList.add('message-image');
+      
+        containerElement.appendChild(messageElement);
+      
+        if (messageType === 'bot-message') {
+          var botContentElement = document.createElement('div');
+          botContentElement.classList.add('bot-content');
+          botContentElement.appendChild(imageElement);
+          botContentElement.appendChild(messageElement);
+          containerElement.appendChild(botContentElement);
+        } else {
+          containerElement.appendChild(imageElement);
+        }
+      
+        return containerElement;
+      }
+      
+
+      function updateChatMessageWidth(messageElement) {
+        var chatContainer = document.getElementById('chatContainer');
+        var containerWidth = chatContainer.offsetWidth;
+        var messageWidth = messageElement.offsetWidth;
+        var maxMessageWidth = containerWidth * 0.92; // 最大宽度为容器宽度的 80%
+        var newMessageWidth = Math.min(messageWidth, maxMessageWidth) + 'px';
+        messageElement.style.width = newMessageWidth;
+      }
+
+      // 退出登陆
+      function logout() {
+      window.location.href = '/logout';
+      }
+    </script>
+  </body>
+
+</html>
